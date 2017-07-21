@@ -1,42 +1,48 @@
 {
-  "name": "scratch",
-  "version": "1.0.0",
-  "description": "JS from scratch",
-  "main": "index.js",
-  "repository": "https://github.com/coyotespike/JSFromScratch.git",
-  "author": "Tim Roy",
-  "license": "MIT",
-  "scripts": {
-    "start": "yarn dev:start",
-    "dev:start": "nodemon --ignore lib --exec babel-node src/server",
-    "test": "eslint src && flow && jest --coverage",
-    "precommit": "yarn test",
-    "prepush": "yarn test"
-  },
-  "browserslist": [
-    "> 1%"
-  ],
-  "dependencies": {
-    "compression": "^1.7.0",
-    "express": "^4.15.3"
-  },
-  "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-eslint": "^7.2.3",
-    "babel-jest": "^20.0.3",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-flow": "^6.23.0",
-    "eslint": "^4.2.0",
-    "eslint-config-airbnb": "^15.0.2",
-    "eslint-plugin-compat": "^1.0.4",
-    "eslint-plugin-flowtype": "^2.35.0",
-    "eslint-plugin-import": "^2.6.1",
-    "eslint-plugin-jsx-a11y": "^5.1.1",
-    "eslint-plugin-react": "^7.1.0",
-    "flow-bin": "^0.50.0",
-    "husky": "^0.14.3",
-    "jest": "^20.0.4",
-    "pm2": "^2.6.1",
-    "rimraf": "^2.6.1"
-  }
+    "name": "scratch",
+    "version": "1.0.0",
+    "description": "JS from scratch",
+    "main": "index.js",
+    "repository": "https://github.com/coyotespike/JSFromScratch.git",
+    "author": "Tim Roy",
+    "license": "MIT",
+    "scripts": {
+	"start": "yarn dev:start",
+	"dev:start": "nodemon --ignore lib --exec babel-node src/server",
+	"test": "eslint src && flow && jest --coverage",
+	"precommit": "yarn test",
+	"prepush": "yarn test",
+	"prepush": "yarn test && yarn prod:build",
+	"prod:build": "rimraf lib && babel src -d lib --ignore .test.js",
+	"prod:start": "cross-env NODE_ENV=production pm2 start lib/server && pm2 logs",
+	"prod:stop": "pm2 delete server"
+    },
+    "browserslist": [
+	"> 1%"
+    ],
+    "dependencies": {
+	"compression": "^1.7.0",
+	"express": "^4.15.3"
+    },
+    "devDependencies": {
+	"babel-cli": "^6.24.1",
+	"babel-eslint": "^7.2.3",
+	"babel-jest": "^20.0.3",
+	"babel-preset-env": "^1.6.0",
+	"babel-preset-flow": "^6.23.0",
+	"cross-env": "^5.0.1",
+	"eslint": "^4.2.0",
+	"eslint-config-airbnb": "^15.0.2",
+	"eslint-plugin-compat": "^1.0.4",
+	"eslint-plugin-flowtype": "^2.35.0",
+	"eslint-plugin-import": "^2.6.1",
+	"eslint-plugin-jsx-a11y": "^5.1.1",
+	"eslint-plugin-react": "^7.1.0",
+	"flow-bin": "^0.50.0",
+	"husky": "^0.14.3",
+	"jest": "^20.0.4",
+	"nodemon": "^1.11.0",
+	"pm2": "^2.6.1",
+	"rimraf": "^2.6.1"
+    }
 }

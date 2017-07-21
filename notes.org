@@ -51,8 +51,28 @@ src/shared/ folder is where we put isomorphic / universal code, for both server 
 yarn add express compression
 Express middleware to add Gzip compression??
 
+"dev:start": "nodemon --ignore lib --exec babel-node src/server"
+nodemon must use babel-node, which we use to allow us to use ES6 syntax.
+
+
 yarn add --dev pm2
+
+pm2 looks badass. Turns our app into a process we can controll more easily.
 
 A neat simple package to delete files with cross platform support is rimraf.
 
 Run yarn add --dev rimraf
+
+"prod:build": "rimraf lib && babel src -d lib --ignore .test.js",
+
+rimraf will delete all the files, and then babel will build them, ignoring test
+files, and put them into lib.
+
+ "prod:start": "cross-env NODE_ENV=production pm2 start lib/server && pm2 logs",
+ "prod:stop": "pm2 delete server",
+
+yarn add --dev cross-env
+Literally just to make the above work on windows.
+
+the prod:start command is passing node-env = production to pm2.
+
