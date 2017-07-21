@@ -44,3 +44,15 @@ yarn add --dev jest babel-jest
 
 Then we can add husky to run before every Git commit or push!
 yarn add --dev husky
+
+** Chapter 03
+src/shared/ folder is where we put isomorphic / universal code, for both server and client.
+
+yarn add express compression
+Express middleware to add Gzip compression??
+
+yarn add --dev pm2
+
+A neat simple package to delete files with cross platform support is rimraf.
+
+Run yarn add --dev rimraf
