@@ -1,0 +1,45 @@
+Right, Yarn uses yarn.lock to, dunno, coordinate with git to ensure version consistency.
+NPM has shrinkwrap.
+
+yarn add --dev [package]
+yarn remove package
+
+With:
+babel-node src,
+yarn add --dev babel-preset-env,
+and .babelrc,
+
+we can use babel to translate ES6 on the fly whenever we run yarn start.
+
+eslint-config-airbnb, eslint-plugin-import, eslint-plugin-jsx-a11y, and eslint-plugin-react
+yarn add --dev eslint
+Then we add a test task to yarn.
+
+I can see that we are using package.json to be something like our Clojure config file, using boot.
+
+If going semi-colon-less, using Automatic Semicolon Insertion: no-unexpected-multiline
+
+yarn add --dev eslint-plugin-compat
+
+TYPE ANNOTATIONS ZOMG
+yarn add --dev flow-bin babel-preset-flow babel-eslint eslint-plugin-flowtype
+- flow-bin is the binary to run Flow in our scripts tasks, 
+- babel-preset-flow is the preset for Babel to understand Flow annotations, 
+- babel-eslint is a package to enable ESLint to rely on Babel's parser instead of its own, and 
+- eslint-plugin-flowtype is an ESLint plugin to lint Flow annotations. Phew.
+
+ESLint will use Babel's parser to understand Flow's annotations. wwwwhhhhooooaaa.
+
+
+Chain into test, then create .flowconfig
+
+// flow-disable-next-line
+something.flow(doesnt.like).for.instance()
+
+Think I'd actually forgot to run that giant yarn add flow. Then had to tweak it so it wouldn't look at node modules.
+
+TESTING
+yarn add --dev jest babel-jest
+
+Then we can add husky to run before every Git commit or push!
+yarn add --dev husky
