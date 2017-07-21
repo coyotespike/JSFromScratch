@@ -1,17 +1,18 @@
 {
-"env": {
-  "jest": true
-},
-  "extends": [
+    "env": {
+	"jest": true,
+	"browser": true
+    },
+    "extends": [
 	"airbnb",
 	"plugin:flowtype/recommended"],
- "plugins": [
+    "plugins": [
 	"flowtype",
-    "compat"
-  ],
-"rules": {
-    "semi": [2, "never"],
-    "no-unexpected-multiline": 2,
-    "compat/compat": 2
-  }
+	"compat"
+    ],
+    "rules": {
+	"semi": [2, "never"],
+	"no-unexpected-multiline": 2,
+	"compat/compat": 2
+    }
 }

@@ -76,3 +76,109 @@ Literally just to make the above work on windows.
 
 the prod:start command is passing node-env = production to pm2.
 
+"prepush": "yarn test && yarn prod:build"
+
+We are not committing these files, since /lib is in our gitignore, but we are
+building before pushing every time, to ensure everything works.
+
+I love these checks, love that we're daemonizing our server, love that we're
+using express, and of course the automated testing and freaking type annotations
+are amazing.
+** Chapter 04: Webpack, React, and Hot Module Replacement
+*** Webpack
+Webpack bundles your modules into one bundle for the client to execute.
+
+We add constants to our config file.
+
+We put babel-polyfill in our client/index.js, before anything else, so we can
+use ES6 Promises etc.
+
+Put browser: true in eslint's config to prevent complaints about window/document being undefined.
+
+More nice ES6 syntax! We are out of the dark ages in modularizing JS files!
+We can require single functions.
+
+import { isProd } from './src/shared/util'
+
+webpack.config.babel.js will tell webpack how to bundle our app into ES5.
+
+The dist folder  will contain things that are generated automatically, unlike CSS.
+
+In module.rules, we say all JS and JSx files, but not node-modules, to go through babel-loader.
+
+And we will use those extensions to resolve modules when we import them. 
+And we declare a port for Webpack Dev Server.
+
+We extend the filename with babel.js so the config file is itself transformed!
+
+Don't yet know what babel-loader is.
+
+"yarn add --dev webpack webpack-dev-server babel-core babel-loader"
+babel-core being peer dependency of babel-loader.
+
+So, before, we used babel to compile our files in preparation for distribution.
+Now we will use Webpack to do Hot Module Reloading, and to prepare for distribution.
+
+Then we add more tasks and tweak others.
+
+And add an app container in render-app.js. If in production, our React app will
+be rendered from the static path; if in dev, from our bundle.js file. It also
+uses ES6 templating, with constant names following convention. Nice.
+
+The path to the WDS bundle is virtual? and WDS needs a different port?
+
+
+So cool! In server/index.js, we console log a message to keep yarn dev:wd
+running in another terminal. And yes that file also triggers a nodemon restart.
+
+Whenever I change client/index.js, webpack recompiles, triggering a nodemon
+restart. The chrome tab errors out, then restarts and reflects the changes.
+
+Hot reloading on front and back end!
+
+You should see static/css/style.css under localhost:8000/, and have all your ES6
+source files under webpack://./src.
+
+THE LATTER MEANS SOURCE MAPS ARE WORKING.
+
+
+After stopping all processes:
+- yarn prod:build, and then yarn prod:start. 
+- Browse to http://localhost:8000/, same text. 
+- In the Source tab of the Chrome console, find static/js/bundle.js under localhost:8000/
+- , but no webpack:// sources. 
+- bundle.js minified!
+
+That is so cool! I can barely keep track of all these packages, and how much
+functionality we have gained so quickly!
+
+So, yarn start will run our express server with nodemon.  yarn dev:wds will run
+our Webpack Dev Server. We'll always have these running in development.
+
+And then of course we'll need another window to continue actually developing.
+
+When we're ready to deploy, we'll use rimraf and babel and webpack to transpile
+and bundle our code. Then we can use pm2 to run our server in production.
+
+I'm not entirely clear why we use WDS in dev and pm2 in production.
+*** React
+flow-react-proptypes which automatically generates PropTypes from Flow
+annotations for your React components.
+
+omg.
+
+Not completely clear on how the React page, when called with React render DOM,
+actually gets tied in with the server.
+
+When changed, the nodemon restart and webpack rebuild are triggered.
+
+We want to make this faster, so it reloads without full-page reload.
+
+Hot Module Replacement!
+
+Cross-Origin Resource Sharing which is necessary for HMR.
+
+We need to make our App a child of react-hot-loader's AppContainer, and we need
+to require the next version of our App when hot-reloading.
+
+Much faster!
