@@ -182,3 +182,62 @@ We need to make our App a child of react-hot-loader's AppContainer, and we need
 to require the next version of our App when hot-reloading.
 
 Much faster!
+
+** Redux, Immutable, and Fetch
+Yes, JS is now strongly typed and immutable. Boom.
+
+We have redux, and redux-actions. Redux is our single source of truth,
+redux-actions helps avoid boilerplate in writing and reading from Redux.
+
+We have an action and an action creator, a function. Action creators return
+objects with type and payload.
+
+Then we create a reducer, which has a state and an action. Given an action with
+a particular type, the reducer will handle it accordingly.
+
+Here our reducer will use its state's set method to reset the state. The set
+method belongs to Immutable JS.
+
+import type { fromJS as Immut } from 'immutable'
+We are using flow's import type statement to rename fromJS, for clarity.
+
+Now we have redux, redux-actions, types from Flow, and immutable JS.
+
+react-redux connects a Redux store with React components.
+
+- Components are dumb React components, in a sense that they don't know anything
+  about the Redux state. 
+- Containers are smart components that know about the state and that we are
+  going to connect to our dumb components.
+
+// @flow
+
+import React from 'react'
+
+type Props = { label: string, handleClick: Function, }
+
+const Button = ({ label, handleClick }: Props) => <button
+  onClick={handleClick}>{label}</button>
+
+export default Button
+
+This is a dumb component, where we are just passing in the Props as React always
+requires us to do.
+
+I must say the syntax still jars a bit, after ClojureScript.
+
+However, note thare we are annotating as we go, which is nice.
+
+We must now wrap these dumb components in smart containers which know about
+Redux actions, and the state of our app.
+
+export default connect(mapStateToProps, mapDispatchToProps)(Button)
+
+This container hooks up the Button component with the sayHello action and
+Redux's dispatch method.
+
+export default connect(mapStateToProps)(Message)
+- This container hooks up the Redux's app state with the Message component. When
+  the state changes, Message will now automatically re-render with the proper
+  message prop. These connections are done via the connect function of
+  react-redux.

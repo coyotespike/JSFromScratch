@@ -16,8 +16,8 @@ app.get('/', (req, res) => {
   res.send(renderApp(APP_NAME))
 })
 app.listen(WEB_PORT, () => {
-    // eslint-disable-next-line no-console
-    console.log(`Server running on port ${WEB_PORT} ${isProd ? '(production)' :
-  '(development).\nKeep "yarn dev:wds" running in another terminal'}.`)
+  // eslint-disable-next-line no-console
+  console.log(`Server running on port ${WEB_PORT} ${isProd ? '(production)' :
+    '(development).\nKeep "yarn dev:wds" running in another terminal'}.`)
 })
 

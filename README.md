@@ -9,3 +9,9 @@ This is a great stack, following https://github.com/verekia/js-stack-from-scratc
 - Webpack to bundle our modules,
 - ES6 for nice modules, Promises, etc.,
 - Hot Module Replacement to speed up Webpack in dev
+
+
+
+
+
+
