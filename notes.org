@@ -183,7 +183,7 @@ to require the next version of our App when hot-reloading.
 
 Much faster!
 
-** Redux, Immutable, and Fetch
+** Chapter 05: Redux, Immutable, and Fetch
 Yes, JS is now strongly typed and immutable. Boom.
 *** Immutable and Redux
 We have redux, and redux-actions. Redux is our single source of truth,

@@ -3,6 +3,9 @@
 	"jest": true,
 	"browser": true
     },
+    "settings": {
+	"polyfills": ["fetch"]
+    },
     "extends": [
 	"airbnb",
 	"plugin:flowtype/recommended"],
