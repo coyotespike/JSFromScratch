@@ -185,7 +185,7 @@ Much faster!
 
 ** Redux, Immutable, and Fetch
 Yes, JS is now strongly typed and immutable. Boom.
-
+*** Immutable and Redux
 We have redux, and redux-actions. Redux is our single source of truth,
 redux-actions helps avoid boilerplate in writing and reading from Redux.
 
@@ -205,6 +205,7 @@ Now we have redux, redux-actions, types from Flow, and immutable JS.
 
 react-redux connects a Redux store with React components.
 
+*** Components
 - Components are dumb React components, in a sense that they don't know anything
   about the Redux state. 
 - Containers are smart components that know about the state and that we are
@@ -241,3 +242,19 @@ export default connect(mapStateToProps)(Message)
   the state changes, Message will now automatically re-render with the proper
   message prop. These connections are done via the connect function of
   react-redux.
+
+*** Store
+Stores are created by passing reducers to them. Here we only have one reducer,
+but for the sake of future scalability, we use combineReducers to group all of
+our reducers together.
+
+The app-container was our hot-loader.
+And now we wrap it in our provider.
+
+Apparently the redux devtools should be a component living in your app, or we
+can use the Chrome extension. It is amazing!!
+
+** To review
+express.static, and other methods.
+Redux! and actions.
+React syntax.
